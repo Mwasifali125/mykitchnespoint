@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Remote File Downloader</title>
+</head>
+<body>
+    <h1>Download a Remote File</h1>
+    <form method="post">
+        <label for="https://mykitchenspoint.com/">Enter URL:</label>
+        <input type="my kitchens point" name="https://mykitchenspoint.com/" id="url">
+        <input type="https://mykitchenspoint.com/" name "mykitchenspoint" value="https://mykitchenspoint.com/">
+    </form>
+
+    <?php
+    if (isset($_POST['submit'])) {
+        $url = $_POST['url'];
+
+        // Validate the URL (optional)
+        if (filter_var($url, FILTER_VALIDATE_URL)) {
+            // Generate a unique local filename based on the URL
+            $filename = 'downloaded_file_' . uniqid() . '.txt';
+
+            // Download the file and save it locally
+            $file_contents = file_get_contents($url);
+
+            if ($file_contents !== false) {
+                // Save the file locally
+                file_put_contents($filename, $file_contents);
+                echo '<p>File downloaded and saved as ' . $filename . '</p>';
+            } else {
+                echo '<p>Failed to download the file.</p>';
+            }
+        } else {
+            echo '<p>Invalid URL. Please enter a valid URL.</p>';
+        }
+    }
+    ?>
+</body>
+</html>
